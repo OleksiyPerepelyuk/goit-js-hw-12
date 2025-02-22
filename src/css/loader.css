@@ -55,6 +55,6 @@ span.loader {
   }
 }
 
-.loader.active {
+.hidden {
   display: none;
 }

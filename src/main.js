@@ -1,13 +1,21 @@
 import fetchImg from './js/pixabay-api';
-import { imagesTemplate, showMessage } from './js/render-functions';
+import {
+  imagesTemplate,
+  showMessage,
+  showMessage2,
+} from './js/render-functions';
 
 const form = document.querySelector('.search-form');
 const input = document.querySelector('.search-input');
+const loadBtn = document.querySelector('.load-more');
+const loader = document.querySelector('.loader-container');
 
 form.addEventListener('submit', onSubmit);
 
 function onSubmit(evt) {
   evt.preventDefault();
+
+  showLoader();
 
   const searchRequest = input.value;
 
@@ -15,21 +23,30 @@ function onSubmit(evt) {
 
   input.value = '';
 
-  const loader = document.querySelector('.loader');
-
-  loader.style.display = 'block';
-
-  setTimeout(() => {
-    loader.style.display = 'none';
-  }, 1000);
-
   fetchImg(searchRequest)
     .then(data => searchResults(data.data.hits))
     .catch(err => console.log(err));
+
+  hideLoader();
 }
 
 function searchResults(images) {
   if (!images.length) showMessage();
 
   imagesTemplate(images);
+}
+
+function showLoader() {}
+loader.classList.remove('.hidden');
+
+function hideLoader() {
+  loader.classList.add('.hidden');
+}
+
+function showLoadMoreBtn() {
+  loadBtn.classList.remove('.hidden');
+}
+
+function hideLoadMoreBtn() {
+  loadBtn.classList.add('.hidden');
 }

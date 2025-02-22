@@ -48,3 +48,28 @@
 .btn-search:focus {
   background-color: #6c8cff;
 }
+
+.more {
+  display: flex;
+  justify-content: center;
+}
+
+.btn-load-more {
+  width: 125px;
+  min-height: 40px;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background-color: #4e75ff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.btn-load-more:hover {
+  background-color: #6c8cff;
+}
