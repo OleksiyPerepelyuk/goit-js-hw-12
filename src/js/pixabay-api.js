@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const API_KEY = '48773957-0ff53b0d4b6397cb99259d9c5';
 
-export default async function fetchImg(searchRequest, page) {
+export default async function fetchImg(searchRequest, page, perPage) {
   const BASE_URL = 'https://pixabay.com';
   const END_POINT = '/api/';
 
@@ -12,7 +12,7 @@ export default async function fetchImg(searchRequest, page) {
     image_type: 'photo',
     orientation: 'horizontal',
     safesearch: true,
-    per_page: 40,
+    per_page: perPage,
     page: page,
   };
 

@@ -53,27 +53,3 @@ export function imagesTemplate(images) {
 
   lightbox.refresh();
 }
-
-export function showMessage() {
-  iziToast.show({
-    position: 'topRight',
-    message:
-      'Sorry, there are no images matching your search query. Please try again!',
-    messageColor: '#FFFFFF',
-    messageSize: '16px',
-    backgroundColor: '#EF4040',
-    maxWidth: '432px',
-    iconUrl: icon,
-  });
-}
-
-export function showMessage2() {
-  iziToast.show({
-    position: 'topRight',
-    message: "We're sorry, but you've reached the end of search results.",
-    messageColor: '#000000',
-    messageSize: '16px',
-    backgroundColor: '#6c8cff',
-    maxWidth: '432px',
-  });
-}

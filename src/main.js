@@ -12,6 +12,7 @@ const loadMoreBtn = document.querySelector('.js-btn-load-more');
 const loader = document.querySelector('.js-loader');
 const gallery = document.querySelector('.js-gallery');
 
+let searchRequest = '';
 let page = 1;
 const perPage = 40;
 let totalHits = 0;
@@ -28,8 +29,8 @@ async function onSubmit(evt) {
   if (!searchRequest) return;
 
   try {
-    const response = await fetchImg(searchRequest, 1, perPage);
-    input.value = '';
+    const response = await fetchImg(searchRequest, page, perPage);
+    page = 1;
 
     if (response.data.hits.length === 0) {
       iziToast.show({
@@ -45,7 +46,6 @@ async function onSubmit(evt) {
     } else {
       imagesTemplate(response.data.hits);
       totalHits = response.data.totalHits;
-
       if (totalHits > perPage) {
         showLoadMoreBtn();
       }
@@ -61,18 +61,18 @@ loadMoreBtn.addEventListener('click', loadMore);
 
 async function loadMore() {
   showLoader();
-  page += 1;
   const searchRequest = input.value.trim();
+  page += 1;
 
   try {
     const response = await fetchImg(searchRequest, page, perPage);
+
     totalHits = response.data.totalHits;
 
     imagesTemplate(response.data.hits);
 
-    if (page >= totalHits) {
+    if (perPage >= response.data.hits) {
       hideLoadMoreBtn();
-
       iziToast.show({
         position: 'topRight',
         message: "We're sorry, but you've reached the end of search results.",
@@ -91,6 +91,8 @@ async function loadMore() {
   scrollPage();
 }
 
+//=============================================
+
 function showLoader() {
   loader.classList.remove('hidden');
 }
@@ -107,6 +109,8 @@ function showLoadMoreBtn() {
 function hideLoadMoreBtn() {
   loadMoreBtn.classList.add('hidden');
 }
+
+//=================================================
 
 function scrollPage() {
   const info = gallery.firstElementChild.getBoundingClientRect();
