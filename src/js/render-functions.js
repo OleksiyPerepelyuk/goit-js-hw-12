@@ -2,12 +2,6 @@ import SimpleLightbox from 'simplelightbox';
 
 import 'simplelightbox/dist/simple-lightbox.min.css';
 
-import iziToast from 'izitoast';
-
-import 'izitoast/dist/css/iziToast.min.css';
-
-import icon from '../img/bi_x-octagon.svg';
-
 const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionPosition: 'bottom',

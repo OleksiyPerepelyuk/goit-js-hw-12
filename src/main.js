@@ -30,6 +30,7 @@ async function onSubmit(evt) {
 
   try {
     const response = await fetchImg(searchRequest, page, perPage);
+
     page = 1;
 
     if (response.data.hits.length === 0) {
@@ -43,6 +44,7 @@ async function onSubmit(evt) {
         maxWidth: '432px',
         iconUrl: icon,
       });
+      input.value = '';
     } else {
       imagesTemplate(response.data.hits);
       totalHits = response.data.totalHits;
