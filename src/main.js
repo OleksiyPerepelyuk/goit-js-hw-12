@@ -27,6 +27,7 @@ async function onSubmit(evt) {
   const searchRequest = input.value.trim();
 
   if (!searchRequest) return;
+  gallery.innerHTML = '';
 
   try {
     const response = await fetchImg(searchRequest, page, perPage);
@@ -34,6 +35,7 @@ async function onSubmit(evt) {
     page = 1;
 
     if (response.data.hits.length === 0) {
+      hideLoadMoreBtn();
       iziToast.show({
         position: 'topRight',
         message:
@@ -70,10 +72,10 @@ async function loadMore() {
     const response = await fetchImg(searchRequest, page, perPage);
 
     totalHits = response.data.totalHits;
-
+    const maxPage = Math.ceil(totalHits / perPage);
     imagesTemplate(response.data.hits);
 
-    if (perPage >= response.data.hits) {
+    if (page >= maxPage) {
       hideLoadMoreBtn();
       iziToast.show({
         position: 'topRight',
@@ -83,6 +85,7 @@ async function loadMore() {
         backgroundColor: '#6c8cff',
         maxWidth: '432px',
       });
+      input.value = '';
     } else {
       showLoadMoreBtn();
     }
